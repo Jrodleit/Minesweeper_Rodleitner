@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+import java.util.Random;
+
 public class MinesweeperController {
 
     @FXML
@@ -27,18 +29,51 @@ public class MinesweeperController {
                 buttons[j][k] = new Button();
                 buttons[j][k].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 gridPane.add(buttons[j][k], j, k);
+                Random random = new Random();
+                boolean RandomBoolean = random.nextDouble() < 0.16;
 
                 final int x = j;
                 final int y = k;
 
-                buttons[j][k].setOnAction(event -> buttonClick(event, x, y));
+                buttons[j][k].setOnAction(event -> buttonClick(event, x, y, RandomBoolean));
+                buttons[j][k].setOnAction(event -> buttonClick(event,x,y, RandomBoolean));
+
+                if (RandomBoolean){
+                    buttons[j][k].setStyle("-fx-background-color: red");
+                    buttons[j][k].setOnAction(event -> buttonClick(event,x,y, RandomBoolean));
+                    buttons[j][k].setOnAction(event -> Bombs(event, x, y));
+
+
+
+                }
+
             }
         }
     }
 
-    private void buttonClick(ActionEvent event, int x, int y) {
+    private void buttonClick(ActionEvent event, int x, int y , Boolean random) {
         System.out.println("Coordinates: (" + x + ", " + y + ")");
+        System.out.println("Biased random boolean value: " + random);
     }
+
+    private void Bombs(ActionEvent event,int x, int y){
+        //System.out.println("Coordinates: (" + x + ", " + y + ")");
+
+        System.out.println("Coordinates: (" + (x-1) + ", " + (y-1) + ")");
+        System.out.println("Coordinates: (" + x + ", " + (y-1) + ")");
+        System.out.println("Coordinates: (" + (x+1) + ", " + (y-1) + ")");
+
+        System.out.println("\nCoordinates: (" + (x-1) + ", " + y + ")");
+        System.out.println("Coordinates: (" + (x+1) + ", " + y + ")");
+
+        System.out.println("\nCoordinates: (" + (x-1) + ", " + (y+1) + ")");
+        System.out.println("Coordinates: (" + x + ", " + (y+1) + ")");
+        System.out.println("Coordinates: (" + (x+1) + ", " + (y+1) + ")");
+
+
+
+    }
+
 }
 
 
