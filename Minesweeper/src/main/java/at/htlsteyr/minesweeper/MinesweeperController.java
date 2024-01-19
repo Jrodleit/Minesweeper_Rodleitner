@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-import java.util.Random;
-
 public class MinesweeperController {
 
     @FXML
@@ -43,7 +41,7 @@ public class MinesweeperController {
                     buttons[j][k].setOnAction(event -> buttonClick(event,x,y, RandomBoolean));
                     buttons[j][k].setOnAction(event -> Bombs(event, x, y));
 
-
+                    buttons[j-1][k-1].setStyle("");
 
                 }
 
