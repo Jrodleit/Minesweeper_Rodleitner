@@ -2,15 +2,12 @@ package at.htlsteyr.minesweeper;
 
 public class Bombs {
 
-
-    private final boolean bombs;
     private int x;
     private int y;
 
-    public Bombs(int x, int y, boolean bombs) {
+    public Bombs(int x, int y) {
         this.x = x;
         this.y = y;
-        this.bombs = bombs;
     }
 
     public int getX() {
@@ -21,7 +18,4 @@ public class Bombs {
         return y;
     }
 
-    public boolean getBombs(){
-        return bombs;
-    }
 }
