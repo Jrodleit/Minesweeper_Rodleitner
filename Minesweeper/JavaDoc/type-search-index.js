@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"Alle Klassen und Schnittstellen","u":"allclasses-index.html"},{"p":"at.htlsteyr.minesweeper","l":"Bombs"},{"p":"at.htlsteyr.minesweeper","l":"MinesweeperApplication"},{"p":"at.htlsteyr.minesweeper","l":"MinesweeperController"}];updateSearchResults();

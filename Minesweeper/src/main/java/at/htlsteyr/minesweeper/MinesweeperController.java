@@ -34,7 +34,7 @@ public class MinesweeperController {
                 buttons[j][k].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 buttons[j][k].setMinSize(30, 30);
                 gridPane.add(buttons[j][k], j, k);
-                buttons[j][k].setStyle("-fx-background-radius: 0");
+                buttons[j][k].setStyle("-fx-background-radius: 0; -fx-text-fill: transparent");
 
                 final int x = j;
                 final int y = k;
@@ -92,12 +92,6 @@ public class MinesweeperController {
         Random random = new Random();
         int bombsToPlace = 10;
         int bombsPlaced = 0;
-        /*
-        if (difficultyComboBox.getValue().equals("Mittel")){
-         bombsToPlace = 40;
-        }
-
-         */
 
         while (bombsPlaced <= bombsToPlace) {
             int j = random.nextInt(MAX);
@@ -124,7 +118,7 @@ public class MinesweeperController {
         System.out.println(count);
 
         buttons[y][x].setStyle("-fx-text-fill: black");
-        //openButtons(x, y);
+        openButtons(x, y);
     }
 
 
@@ -208,31 +202,26 @@ public class MinesweeperController {
         }
         return count;
     }
-    /*
     private void openButtons(int x, int y) {
         if (x >= 0 && x < MAX && y >= 0 && y < MAX && !visited[y][x]) {
-            visited[y][x] = true; // Mark the current button as visited
+            visited[y][x] = true; // setzt den geclickten butten als visited
 
-            if (buttons[y][x].getText().isEmpty()) { // If the button is empty
+            if (buttons[y][x].getText().isEmpty()) { // wenn der button leer ist
                 buttons[y][x].setStyle("-fx-text-fill: black");
 
-                // Check and open adjacent buttons recursively
+                // checken der Buttons
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) {
                         int newX = x + i;
                         int newY = y + j;
                         if (newX >= 0 && newX < MAX && newY >= 0 && newY < MAX && (i != 0 || j != 0)) {
-                            openButtons(newX, newY); // Recursive call
+                            openButtons(newX, newY); // rekursion
                         }
                     }
                 }
-            } else if (!buttons[y][x].getText().equals("Flagge")) { // If the button is not a mine or flagged
+            } else if (!buttons[y][x].getText().equals("Flagge")) { // wenn der button keine bombe oder flagge ist
                 buttons[y][x].setStyle("-fx-text-fill: black");
             }
         }
     }
-
-     */
-
-
 }
