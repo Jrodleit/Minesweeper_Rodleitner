@@ -39,7 +39,7 @@ public class MinesweeperController {
                 final int x = j;
                 final int y = k;
 
-                buttons[j][k].setOnAction(actionEvent -> buttonClick(actionEvent, x, y));
+                buttons[j][k].setOnAction(actionEvent -> buttonClick(actionEvent, y, x));
 
                 buttons[j][k].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                     String tempStyle = buttons[x][y].getStyle();
@@ -98,7 +98,7 @@ public class MinesweeperController {
             int k = random.nextInt(MAX);
 
             if (!bombList.contains(new Bombs(j, k)) && (j != firstX || k != firstY)) { // keine Bomben setzten auf den ersten Button
-                buttons[j][k].setStyle("-fx-background-color: red");
+                //buttons[j][k].setStyle("-fx-background-color: red");
                 buttons[j][k].setOnAction(event -> Bombs(event, j, k));
                 bombList.add(new Bombs(j, k));
                 bombsPlaced++;
