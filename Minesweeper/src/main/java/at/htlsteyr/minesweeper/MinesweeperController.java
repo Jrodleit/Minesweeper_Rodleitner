@@ -26,15 +26,19 @@
 
 package at.htlsteyr.minesweeper;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -47,6 +51,8 @@ public class MinesweeperController {
     GridPane gridPane = new GridPane();
     @FXML
     ComboBox<String> difficultyComboBox = new ComboBox<>();
+    @FXML
+    private Label label = new Label();
     private int MAX = 8;
     private final Button[][] buttons = new Button[MAX][MAX];
     private LinkedList<Bombs> bombList = new LinkedList<Bombs>();
@@ -60,12 +66,12 @@ public class MinesweeperController {
                 buttons[j][k].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 buttons[j][k].setMinSize(30, 30);
                 gridPane.add(buttons[j][k], j, k);
-                buttons[j][k].setStyle("-fx-background-radius: 0; -fx-text-fill: transparent");
+                buttons[j][k].setStyle("-fx-background-radius: 0; -fx-text-fill: transparent ");//-fx-text-fill: transparent`
 
                 final int x = j;
                 final int y = k;
 
-                buttons[j][k].setOnAction(actionEvent -> buttonClick(actionEvent, y, x));
+                buttons[j][k].setOnAction(actionEvent -> buttonClick(actionEvent, x, y));
 
                 buttons[j][k].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                     String tempStyle = buttons[x][y].getStyle();
@@ -144,15 +150,48 @@ public class MinesweeperController {
         int count = countBombs(x,y);
         System.out.println(count);
 
-        buttons[y][x].setStyle("-fx-text-fill: black");
+        buttons[x][y].setStyle("-fx-text-fill: black");
         openButtons(x, y);
     }
 
 
+    private void resetGame() {
+        bombList.clear();
+        visited = new boolean[MAX][MAX];
+
+        for (int i = 0; i < MAX; i++) {
+            for (int j = 0; j < MAX; j++) {
+                buttons[i][j].setText("");
+                buttons[i][j].setStyle("-fx-text-fill: transparent");
+                buttons[i][j].setDisable(false);
+            }
+        }
+
+        label.setText("");
+
+        isFirstClick = true;
+
+        if (!isFirstClick) {
+            placeBombs();
+        }
+    }
+
     private void Bombs(ActionEvent event, int x, int y) {
+        label.setStyle("-fx-text-fill: red; -fx-font-scale: 20");
+        label.setText("You Lost!");
 
-        System.out.println("You lost");
+        for (Bombs bomb : bombList) {
+            buttons[bomb.getY()][bomb.getX()].setStyle("-fx-background-color: red");
+        }
 
+        for (int i = 0; i < MAX; i++) {
+            for (int j = 0; j < MAX; j++) {
+                buttons[i][j].setDisable(true);
+            }
+        }
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> resetGame()));
+        timeline.play();
     }
 
     private void setNumbers() {
@@ -223,31 +262,34 @@ public class MinesweeperController {
         for (Bombs bomb : bombList) {
             int bombX = bomb.getX();
             int bombY = bomb.getY();
-            if (Math.abs(bombX - x) <= 1 && Math.abs(bombY - y) <= 1 && !(bombX == x && bombY == y)) {
-                count++;
+            // check ob eine bombe im 3x3 feld ist
+            if (Math.abs(bombX - x) <= 1 && Math.abs(bombY - y) <= 1) {
+                if (!(bombX == x && bombY == y)) {
+                    count++;
+                }
             }
         }
         return count;
     }
     private void openButtons(int x, int y) {
-        if (x >= 0 && x < MAX && y >= 0 && y < MAX && !visited[y][x]) {
-            visited[y][x] = true; // setzt den geclickten butten als visited
+        if (x >= 0 && x < MAX && y >= 0 && y < MAX && !visited[x][y]) {
+            visited[x][y] = true;
 
-            if (buttons[y][x].getText().isEmpty()) { // wenn der button leer ist
-                buttons[y][x].setStyle("-fx-text-fill: black");
+            if (buttons[x][y].getText().isEmpty()) {
+                buttons[x][y].setStyle("-fx-text-fill: black");
 
-                // checken der Buttons
+                // Check the neighboring buttons
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) {
                         int newX = x + i;
                         int newY = y + j;
                         if (newX >= 0 && newX < MAX && newY >= 0 && newY < MAX && (i != 0 || j != 0)) {
-                            openButtons(newX, newY); // rekursion
+                            openButtons(newX, newY); // Rekursion
                         }
                     }
                 }
-            } else if (!buttons[y][x].getText().equals("Flagge")) { // wenn der button keine bombe oder flagge ist
-                buttons[y][x].setStyle("-fx-text-fill: black");
+            } else if (!buttons[x][y].getText().equals("Flagge")) {
+                buttons[x][y].setStyle("-fx-text-fill: black");
             }
         }
     }

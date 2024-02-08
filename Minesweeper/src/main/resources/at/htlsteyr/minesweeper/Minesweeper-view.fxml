@@ -31,4 +31,7 @@
    <top>
       <ComboBox fx:id="difficultyComboBox" prefHeight="26.0" prefWidth="108.0" BorderPane.alignment="TOP_LEFT" />
    </top>
+   <bottom>
+      <Label fx:id="label" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
