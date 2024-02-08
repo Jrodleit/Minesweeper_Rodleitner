@@ -1,3 +1,29 @@
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Elektronik und Technische Informatik
+ *----------------------------------------------------------------------------*/
+/**
+ * Kurzbeschreibung
+ *
+ * @author  : Joschua Rodleitner
+ * @date    : 07.02.2024
+ *
+ * @details
+ *   Dieser Controller implementiert die Logik des Minesweeper-Spiels. Es bietet Funktionen zum Platzieren von Buttons
+ *   , zum Setzen von Bomben, zum Anzeigen von Zahlen um die Bomben herum und zum Öffnen von leeren Bereichen.
+ *   Das Spiel beginnt, sobald der Benutzer den ersten Button klickt. Wenn eine Bombe angeklickt wird,
+ *   wird das Spiel beendet und eine entsprechende Meldung ausgegeben. Der Benutzer kann Flaggen platzieren und entfernen,
+ *   um potenzielle Bomben zu markieren. Das Öffnen von leeren Bereichen erfolgt rekursiv, um benachbarte leere Felder
+ *   automatisch zu öffnen. Die Anzahl der Bomben um ein Feld herum wird angezeigt, um dem Spieler Hinweise zu geben,
+ *   wo sich Bomben befinden könnten.
+ *
+ */
+
+/**
+ * \addtogroup modulname
+ * @{
+ */
+
 package at.htlsteyr.minesweeper;
 
 import javafx.collections.FXCollections;
@@ -97,7 +123,8 @@ public class MinesweeperController {
             int j = random.nextInt(MAX);
             int k = random.nextInt(MAX);
 
-            if (!bombList.contains(new Bombs(j, k)) && (j != firstX || k != firstY)) { // keine Bomben setzten auf den ersten Button
+            if (!bombList.contains(new Bombs(j, k)) && (j != firstX || k != firstY)) {
+                // keine Bomben setzten auf den ersten Button
                 //buttons[j][k].setStyle("-fx-background-color: red");
                 buttons[j][k].setOnAction(event -> Bombs(event, j, k));
                 bombList.add(new Bombs(j, k));
