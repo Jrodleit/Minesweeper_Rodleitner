@@ -10,6 +10,11 @@ Intuitive Benutzeroberfläche: Links klicken, um Zellen aufzudecken, Rechtsklick
 Anpassbares Gameplay: Rastergröße und Minenplatzierung je nach Schwierigkeit.
 Dynamische Anzeige: Zahlen zeigen benachbarte Minen an.
 
+    Zusätzliche Funktionen:
+
+    Sicheres erstes Klicken: Alle Bomben werden erst nach dem ersten Klick generiert. Dies stellt sicher, 
+    dass der erste Klick des Spielers immer eine leere Zelle aufdeckt und niemals eine Bombe trifft.
+
   Verwendung:
           
 Nach dem Start der Anwendung wird das Minesweeper-Spielfeld angezeigt.
