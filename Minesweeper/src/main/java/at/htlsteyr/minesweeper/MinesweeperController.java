@@ -9,13 +9,9 @@
  * @date    : 07.02.2024
  *
  * @details
- *   Dieser Controller implementiert die Logik des Minesweeper-Spiels. Es bietet Funktionen zum Platzieren von Buttons
- *   , zum Setzen von Bomben, zum Anzeigen von Zahlen um die Bomben herum und zum Öffnen von leeren Bereichen.
- *   Das Spiel beginnt, sobald der Benutzer den ersten Button klickt. Wenn eine Bombe angeklickt wird,
- *   wird das Spiel beendet und eine entsprechende Meldung ausgegeben. Der Benutzer kann Flaggen platzieren und entfernen,
- *   um potenzielle Bomben zu markieren. Das Öffnen von leeren Bereichen erfolgt rekursiv, um benachbarte leere Felder
- *   automatisch zu öffnen. Die Anzahl der Bomben um ein Feld herum wird angezeigt, um dem Spieler Hinweise zu geben,
- *   wo sich Bomben befinden könnten.
+ *   Dies ist ein Projekt, das die Logik des Minesweeper-Spiels umfasst. Es bietet Funktionen zum Starten des Spiels,
+ *   Setzen von Bomben, Anzeigen von Zahlen, Platzieren von Flaggen und Öffnen von leeren Bereichen. Wenn eine Bombe
+ *   angeklickt wird, endet das Spiel.
  *
  */
 
